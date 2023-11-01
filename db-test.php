@@ -13,19 +13,18 @@ $statement = $db
 //*/
 
 $statement = vrzno_await($prepare->all());
+$result = vrzno_await($statement);
 
-$statement->then(function($result){
-    $headers = false;
-    $records = (array)$result->results;
-    $stdout  = fopen('php://stdout', 'w');
+$headers = false;
+$records = (array)$result->results;
+$stdout  = fopen('php://stdout', 'w');
 
-    foreach($records as $record)
+foreach($records as $record)
+{
+    if(!$headers)
     {
-        if(!$headers)
-        {
-            fputcsv($stdout, array_keys($record), "\t");
-        }
-
-        fputcsv($stdout, $record, "\t");
+        fputcsv($stdout, array_keys($record), "\t");
     }
-});
+
+    fputcsv($stdout, $record, "\t");
+}
