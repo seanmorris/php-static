@@ -1,5 +1,3 @@
-DB Test:
-
 <?php
 
 $vrzno = new Vrzno;
@@ -16,8 +14,17 @@ $statement = $db
 
 $all = vrzno_await($statement->all());
 
-$all->then(function($all){
+$out = fopen('php://stdout', 'w');
+$headers = false;
+
+$all->then(function($all) use($out, &$headers) {
+
+    if(!$headers)
+    {
+        fputcsv($out, array_keys((array)$all->results), "\t");
+        $headers = true;
+    }
     
-    var_dump($all->results);
+    fputcsv($out, (array)$all->results, "\t");
 
 });
