@@ -20,12 +20,15 @@ $headers = false;
 $all->then(function($all) use($out, &$headers) {
     foreach($all->results as $record)
     {
+        var_dump($record);
+        var_dump((array)$record);
+
         if(!$headers)
         {
-            fputcsv($out, array_keys($record), "\t");
+            fputcsv($out, array_keys((array)$record), "\t");
             $headers = true;
         }
         
-        fputcsv($out, $record, "\t");
+        fputcsv($out, (array)$record, "\t");
     }
 });
