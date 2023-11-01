@@ -15,6 +15,8 @@
             <?php endforeach; ?>
         </ul>
         <p>Check out the github:</p>
-        <a href = "https://github.com/seanmorris/php-wasm">https://github.com/seanmorris/php-wasm</a>
+        <p><a href = "https://github.com/seanmorris/php-wasm">https://github.com/seanmorris/php-wasm</a></p>
+        <p><a href = "https://github.com/seanmorris/php-cloud">https://github.com/seanmorris/php-cloud</a></p>
+        <p><a href = "https://github.com/seanmorris/php-static">https://github.com/seanmorris/php-static</a></p>
     </body>
 </html>
