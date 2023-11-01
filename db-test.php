@@ -12,6 +12,8 @@ $statement = $db
 
 $all = $vrzno->all($statement);
 
-var_dump($result);
+$all->then(function($all){
+    
+    var_dump($all->results);
 
-$all->then(var_dump(...));
+});
