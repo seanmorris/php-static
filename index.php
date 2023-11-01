@@ -2,6 +2,7 @@
     $links = [
         'Hello, world!' => '/hello-world.php',
         'php info' => '/phpinfo.php',
+        'D1 SQL' => '/db-test.php',
     ];
 ?>
 <html>
