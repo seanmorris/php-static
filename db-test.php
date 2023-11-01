@@ -5,26 +5,25 @@ $vrzno = new Vrzno;
 $db = $vrzno->env->db;
 
 //*/
-$prepare = $db->prepare('SELECT * FROM Customers');
+$statement = $db->prepare('SELECT * FROM Customers');
 /*/
 $statement = $db
 ->prepare('SELECT * FROM Customers WHERE CompanyName = ?')
 ->bind('Bs Beverages');
 //*/
 
-$statement = vrzno_await($prepare->all());
-$result = vrzno_await($statement);
+$statement->all()->then(function($result){
+    $headers = false;
+    $records = (array)$result->results;
+    $stdout  = fopen('php://stdout', 'w');
 
-$headers = false;
-$records = (array)$result->results;
-$stdout  = fopen('php://stdout', 'w');
-
-foreach($records as $record)
-{
-    if(!$headers)
+    foreach($records as $record)
     {
-        fputcsv($stdout, array_keys($record), "\t");
-    }
+        if(!$headers)
+        {
+            fputcsv($stdout, array_keys($record), "\t");
+        }
 
-    fputcsv($stdout, $record, "\t");
-}
+        fputcsv($stdout, $record, "\t");
+    }
+});
