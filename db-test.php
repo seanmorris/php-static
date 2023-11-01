@@ -15,7 +15,8 @@ $statement = $db
 $all = vrzno_await($statement->all());
 
 $all->then(function($all){
-    
-    var_dump($all->results);
-
+    foreach($all->results as $record)
+    {
+        var_dump($record);
+    }
 });
