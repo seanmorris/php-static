@@ -14,7 +14,9 @@ $statement = $db
 ->bind('Bs Beverages');
 //*/
 
-$statement->all->then(function($all){
+$all = $vrzno->all($statement);
+
+$all->then(function($all){
     
     var_dump($all->results);
 
