@@ -12,6 +12,8 @@ $statement = $db
 ->bind('Bs Beverages');
 //*/
 
+var_dump(vrzno_env('_GET'));
+
 $statement->all()->then(function($result){
     $headers = false;
     $records = (array)$result->results;
