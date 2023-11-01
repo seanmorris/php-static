@@ -23,10 +23,10 @@ $all->then(function($all){
     {
         if(!$headers)
         {
-            fputcsv($out, array_keys($record), "\t");
+            fputcsv($stdout, array_keys($record), "\t");
         }
 
-        fputcsv($out, $record, "\t");
+        fputcsv($stdout, $record, "\t");
 
         var_dump($record);
     }
