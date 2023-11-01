@@ -1,3 +1,5 @@
+<pre>
+
 <?php
 
 $get = vrzno_env('_GET');
@@ -23,3 +25,7 @@ $statement->all()->then(function($result){
         var_dump($record);
     }
 });
+
+?>
+
+</pre>
