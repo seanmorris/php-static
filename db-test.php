@@ -7,10 +7,9 @@ $vrzno = new Vrzno;
 $db = $vrzno->env->db;
 
 $statement = $db
-    ->prepare('SELECT * FROM Customers WHERE CompanyName = ?')
-    ->bind('Bs Beverages')
-    ->all();
+->prepare('SELECT * FROM Customers WHERE CompanyName = ?')
+->bind('Bs Beverages');
 
-$statement->then(function($result){
-    echo json_encode($result);
-});
+$result = $vrzno->all($statement);
+
+echo json_encode($result);
