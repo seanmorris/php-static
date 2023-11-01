@@ -10,9 +10,7 @@ $statement = $db
 ->prepare('SELECT * FROM Customers WHERE CompanyName = ?')
 ->bind('Bs Beverages');
 
-$all = $vrzno->all($statement);
-
-$all->then(function($all){
+$statement->then(function($all){
     
     var_dump($all->results);
 
