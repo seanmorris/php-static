@@ -1,18 +1,18 @@
 <?php
 
-$vrzno = new Vrzno;
+$db  = (new Vrzno)->env->db;
+$get = vrzno_env('_GET');
 
-$db = $vrzno->env->db;
-
-//*/
-$statement = $db->prepare('SELECT * FROM Customers');
-/*/
-$statement = $db
-->prepare('SELECT * FROM Customers WHERE CompanyName = ?')
-->bind('Bs Beverages');
-//*/
-
-var_dump(vrzno_env('_GET'));
+if(!$get->id)
+{
+    $statement = $db->prepare('SELECT * FROM Customers');
+}
+else
+{
+    $statement = $db->prepare('SELECT * FROM Customers')
+    ->prepare('SELECT * FROM Customers WHERE id = ?')
+    ->bind($get->id);
+}
 
 $statement->all()->then(function($result){
     $headers = false;
@@ -21,11 +21,12 @@ $statement->all()->then(function($result){
 
     foreach($records as $record)
     {
-        if(!$headers)
-        {
-            fputcsv($stdout, array_keys($record), "\t");
-        }
+        var_dump($record);
+        // if(!$headers)
+        // {
+        //     fputcsv($stdout, array_keys($record), "\t");
+        // }
 
-        fputcsv($stdout, $record, "\t");
+        // fputcsv($stdout, $record, "\t");
     }
 });
