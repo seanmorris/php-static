@@ -1,3 +1,5 @@
+DB Test:
+
 <?php
 
 $vrzno = new Vrzno;
