@@ -15,10 +15,19 @@ $statement = $db
 $all = vrzno_await($statement->all());
 
 $all->then(function($all){
+    $headers = false;
     $records = (array)$all->results;
-    var_dump($records);
+    $stdout  = fopen('php://stdout', 'w');
+
     foreach($records as $record)
     {
+        if(!$headers)
+        {
+            fputcsv($out, array_keys($record), "\t");
+        }
+
+        fputcsv($out, $record, "\t");
+
         var_dump($record);
     }
 });
