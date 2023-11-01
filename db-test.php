@@ -4,7 +4,7 @@ DB Test:
 
 $vrzno = new Vrzno;
 
-$db = $vrzno->_env->db;
+$db = $vrzno->env->db;
 
 $statement = $db
     ->prepare('SELECT * FROM Customers WHERE CompanyName = ?')
