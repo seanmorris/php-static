@@ -18,13 +18,14 @@ $out = fopen('php://stdout', 'w');
 $headers = false;
 
 $all->then(function($all) use($out, &$headers) {
-
-    if(!$headers)
+    foreach($all->results as $record)
     {
-        fputcsv($out, array_keys((array)$all->results), "\t");
-        $headers = true;
+        if(!$headers)
+        {
+            fputcsv($out, array_keys($record), "\t");
+            $headers = true;
+        }
+        
+        fputcsv($out, $record, "\t");
     }
-    
-    fputcsv($out, (array)$all->results, "\t");
-
 });
