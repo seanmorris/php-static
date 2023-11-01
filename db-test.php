@@ -1,5 +1,3 @@
-<pre>
-
 <?php
 
 $get = vrzno_env('_GET');
@@ -20,12 +18,15 @@ else
 $statement->all()->then(function($result){
     $records = (array)$result->results;
 
+    echo "<pre>";
+
     foreach($records as $record)
     {
         var_dump($record);
     }
+
+    echo "</pre>";
 });
 
 ?>
 
-</pre>
