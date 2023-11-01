@@ -9,8 +9,7 @@ if(!$get->id)
 }
 else
 {
-    $statement = $db->prepare('SELECT * FROM Customers')
-    ->prepare('SELECT * FROM Customers WHERE id = ?')
+    $statement = $db->prepare('SELECT * FROM Customers WHERE id = ?')
     ->bind($get->id);
 }
 
