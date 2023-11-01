@@ -12,4 +12,4 @@ $statement = $db
 
 $result = $vrzno->all($statement);
 
-echo json_encode($result);
+var_dump($result);
