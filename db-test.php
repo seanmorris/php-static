@@ -16,9 +16,8 @@ $all = vrzno_await($statement->all());
 
 $all->then(function($all){
     var_dump($all->results);
-    var_dump([...$all->results]);
-    foreach($all->results as $record)
+    foreach($all->results as $i => $record)
     {
-        var_dump($record);
+        var_dump($i, $record);
     }
 });
