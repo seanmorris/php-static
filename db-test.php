@@ -12,19 +12,20 @@ $statement = $db
 ->bind('Bs Beverages');
 //*/
 
-$statement = vrzno_await($prepare);
-$results = vrzno_await($statement->all());
+$statement = vrzno_await($prepare->all());
 
-$headers = false;
-$records = (array)$results->results;
-$stdout = fopen('php://stdout', 'w');
+$statement->then(function($result){
+    $headers = false;
+    $records = (array)$result->results;
+    $stdout  = fopen('php://stdout', 'w');
 
-foreach($records as $record)
-{
-    if(!$headers)
+    foreach($records as $record)
     {
-        fputcsv($stdout, array_keys($record), "\t");
-    }
+        if(!$headers)
+        {
+            fputcsv($stdout, array_keys($record), "\t");
+        }
 
-    fputcsv($stdout, $record, "\t");
-}
+        fputcsv($stdout, $record, "\t");
+    }
+});
