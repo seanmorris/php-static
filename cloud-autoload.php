@@ -1,3 +1,9 @@
+<h1>How it works:</h1>
+
+<p><a target = "_blank" href = "https://github.com/seanmorris/php-cloud/blob/master/functions/%5B%5Bpath%5D%5D.js">This function</a> is running <a target = "_blank" href = "https://github.com/seanmorris/php-static/blob/master/cloud-autoload.php">this php script</a> which dynamically downloads <a target = "_blank" href = "https://packagist.org/packages/seanmorris/bob">this composer package</a>, and loads it into memory.</p>
+
+<p>This is all triggered by <a target = "_blank" href = "https://github.com/seanmorris/php-static/blob/master/cloud-autoload.php#L164">line 164</a>, where the class is simply called by name, and PHP notices its not loaded yet, which kicks on the autoload behavior.</p>
+
 <?php
 class CloudAutoloader
 {
@@ -152,7 +158,6 @@ class CloudAutoloader
 		return $found;
 	}
 }
-
 
 // Register the autoloader
 spl_autoload_register( fn($className) => CloudAutoloader::autoload($className) );
