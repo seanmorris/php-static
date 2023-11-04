@@ -3,6 +3,7 @@
         'Hello, world!' => '/hello-world.php',
         'php info' => '/phpinfo.php',
         'D1 SQL' => '/db-test.php',
+        'Cloud Autoloader' => '/cloud-autoload.php',
     ];
 ?>
 <html>
