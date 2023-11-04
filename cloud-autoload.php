@@ -171,6 +171,7 @@ $encoded = $bank->encode($value);
 $decoded = $bank->decode($encoded);
 ?>
 <pre><?php
+	var_dump(['BobBank' => $bank]);
 	var_dump(['Raw Val' => $value]);
 	var_dump(['Encoded' => $encoded]);
 	var_dump(['Decoded' => $decoded]);
