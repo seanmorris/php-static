@@ -15,18 +15,18 @@ else
     ->bind($get->id);
 }
 
-$statement->all()->then(function($result){
-    $records = (array)$result->results;
+$result = vrzno_await($statement->all());
 
-    echo "<pre>";
+$records = (array)$result->results;
 
-    foreach($records as $record)
-    {
-        var_dump($record);
-    }
+echo "<pre>";
 
-    echo "</pre>";
-});
+foreach($records as $record)
+{
+	var_dump($record);
+}
+
+echo "</pre>";
 
 ?>
 
