@@ -1,9 +1,9 @@
 <?php
-eval('?>'.vrzno_await( vrzno_await((new Vrzno)->fetch(vrzno_env('staticOrigin') . '/CloudAutoloader.php'))->text()));
+eval('?>'.vrzno_await( vrzno_await((new Vrzno)->fetch('https://seanmorris.github.io/php-static/CloudAutoloader.php'))->text()));
 
-CloudAutoloader::register('http://localhost:8788/zip-proxy?zip=');
+CloudAutoloader::register('/zip-proxy?zip=');
 
-eval('?>'.vrzno_await( vrzno_await((new Vrzno)->fetch(vrzno_env('staticOrigin') . '/WikiMarkdown.php'))->text()));
+eval('?>'.vrzno_await( vrzno_await((new Vrzno)->fetch('https://seanmorris.github.io/php-static/WikiMarkdown.php'))->text()));
 
 $parser = new WikiMarkdown();
 
