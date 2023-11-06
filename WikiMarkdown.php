@@ -19,8 +19,8 @@ class WikiMarkdown extends \cebe\markdown\GithubMarkdown
 
 		if($url && (substr($url, 0, 7) === 'http://' || substr($url, 0, 8) === 'https://'))
 		{
-			$text  = '';
-			$title = $url = NULL;
+			$text = $title = '';
+			$url = '';
 		}
 
 		$url = sprintf('/wiki.php?page=%s', $url);
