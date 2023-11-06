@@ -1,9 +1,3 @@
-<h1>How it works:</h1>
-
-<p><a target = "_blank" href = "https://github.com/seanmorris/php-cloud/blob/master/functions/%5B%5Bpath%5D%5D.js">This function</a> is running <a target = "_blank" href = "https://github.com/seanmorris/php-static/blob/master/cloud-autoload.php">this php script</a> which dynamically downloads <a target = "_blank" href = "https://packagist.org/packages/seanmorris/bob">this composer package</a>, and loads it into memory.</p>
-
-<p>This is all triggered by <a target = "_blank" href = "https://github.com/seanmorris/php-static/blob/master/cloud-autoload.php#L166">line 166</a>, where the class is simply called by name, and PHP notices its not loaded yet, which kicks off the autoload behavior.</p>
-
 <?php
 class CloudAutoloader
 {
@@ -16,20 +10,20 @@ class CloudAutoloader
 		/*, $psr0 = []*/
 	;
 
-	public static function autoload($className)
+	public static function autoload($className, $zipProxy)
 	{
 		static::$loader = static::$loader ?? new static;
 		static::$vrzno  = static::$vrzno  ?? new Vrzno;
 
 		$zipUrl = static::$loader->locateClassPackage($className);
 
-		static::$loader->loadPackage($zipUrl);
+		static::$loader->loadPackage($zipProxy . $zipUrl);
 		static::$loader->includeClass($className);
 	}
 
-	public static function register()
+	public static function register($zipProxy = '')
 	{
-		spl_autoload_register(fn($className) => static::autoload($className));
+		spl_autoload_register(fn($className) => static::autoload($className, $zipProxy));
 	}
 
 	protected function __construct()
@@ -184,22 +178,3 @@ class CloudAutoloader
 		return $found;
 	}
 }
-
-// Register the autoloader
-spl_autoload_register( fn($className) => CloudAutoloader::autoload($className) );
-
-// Autoload and instantiate a class.
-$bank = new \SeanMorris\Bob\Bank;
-
-// Use it.
-$value = [0,1,2,3];
-$encoded = $bank->encode($value);
-$decoded = $bank->decode($encoded);
-?>
-
-<pre><?php
-	var_dump(['BobBank' => $bank]);
-	var_dump(['Raw Val' => $value]);
-	var_dump(['Encoded' => $encoded]);
-	var_dump(['Decoded' => $decoded]);
-?></pre>

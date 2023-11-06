@@ -1,0 +1,57 @@
+* {
+	font-family: sans-serif;
+}
+pre, code {
+	font-family: monospace;
+}
+form, label {
+	display: flex;
+	flex-direction: column;
+}
+form label textarea {
+	resize: vertical;
+	padding: 0;
+}
+
+label input[type="submit"],
+label input[type="button"],
+label button {
+	display: inline-block;
+	align-self: flex-end;
+}
+
+section, navigation {
+	display: contents;
+}
+
+section[data-current-view="view"] > * { display:none; }
+section[data-current-view="view"] > #page-view { display:initial; }
+
+section[data-current-view="edit"] > * { display:none; }
+section[data-current-view="edit"] > #page-edit { display:initial; }
+
+textarea{
+	min-height: 200px;
+}
+
+h1, input[name="PageTitle"] {
+	padding: 0;
+	font-weight:bold;
+	margin: 1rem 0;
+	font-size: 1.25rem;
+	border:0;
+}
+
+#view-title {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.edit-indicator {
+	display: none;
+}
+
+[data-edited="true"] .edit-indicator {
+	display: initial;
+}
