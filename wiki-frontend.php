@@ -19,12 +19,14 @@ $editButton->addEventListener('click', function() use($vrzno, $pageSection) {
 	$pageSection->setAttribute('data-current-view', 'edit');
 });
 
-$viewButton->addEventListener('click', function() use($vrzno, $pageSection) {
+$edited = '';
+
+$viewButton->addEventListener('click', function() use($vrzno, $parser, $pageSection, $content, &$edited) {
+	$content->innerHTML = $parser->parse($edited);
 	$pageSection->setAttribute('data-current-view', 'view');
 });
 
-$editContent->addEventListener('input', function($event) use($vrzno,$parser,$content,$pageSection) {
+$editContent->addEventListener('input', function($event) use($vrzno, $pageSection, &$edited) {
 	$pageSection->setAttribute('data-edited', 'true');
-	$content->innerHTML = $parser->parse($event->target->value);
-
+	$edited = $event->target->value;
 });
