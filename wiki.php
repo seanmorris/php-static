@@ -13,46 +13,38 @@ $db   = vrzno_env('db');
 
 $pageTitle = $get->page ?? 'index';
 
-$select = $db
-->prepare('SELECT PageTitle, PageContent FROM WikiPages WHERE PageTitle = ?')
-->bind($pageTitle)
-->first();
+$pdo = new PDO($connStr = 'vrzno:' . vrzno_target(vrzno_env('db')));
 
-$page = vrzno_await($select);
+$select = $pdo->prepare('SELECT PageTitle, PageContent FROM WikiPages WHERE PageTitle = ?');
+$select->execute([$pageTitle]);
+$page = $select->fetchObject();
 
 if($pageTitle && $post->PageContent)
 {
 	if($page)
 	{
-		$update = $db
-		->prepare('UPDATE WikiPages SET PageContent = ?2 WHERE PageTitle = ?1')
-		->bind($pageTitle, $post->PageContent)
-		->run();
-
-		vrzno_await($update);
+		$update = $pdo->prepare('UPDATE WikiPages SET PageContent = ?2 WHERE PageTitle = ?1');
+		$update->execute([$pageTitle, $post->PageContent]);
 	}
 	else
 	{
-		$insert = $db
-		->prepare('INSERT INTO WikiPages (PageTitle, PageContent) VALUES (?1, ?2) ')
-		->bind($pageTitle, $post->PageContent)
-		->run();
-
-		vrzno_await($insert);
+		$insert = $pdo->prepare('INSERT INTO WikiPages (PageTitle, PageContent) VALUES (?1, ?2)');
+		$insert->execute([$pageTitle, $post->PageContent]);
 	}
 
-	$select = $db
-	->prepare('SELECT PageTitle, PageContent FROM WikiPages WHERE PageTitle = ?')
-	->bind($pageTitle)
-	->first();
-
-	$page = vrzno_await($select);
+	$select = $pdo->prepare('SELECT PageTitle, PageContent FROM WikiPages WHERE PageTitle = ?');
+	$select->execute([$pageTitle]);
+	$page = $select->fetchObject();
 }
 
-$page = $page ?? (object) [
-	'PageTitle'   => '',
-	'PageContent' => '',
-];
+if(!$page)
+{
+	$page = (object) [
+		'PageTitle'   => '',
+		'PageContent' => '',
+	];
+}
+
 ?>
 
 <script async type = "text/javascript" src = "https://cdn.jsdelivr.net/npm/php-wasm/php-tags.mjs"></script>
