@@ -15,11 +15,12 @@ $pageSection = $vrzno->document->querySelector('#page');
 $content = $vrzno->document->querySelector('#view-content');
 $editContent = $vrzno->document->querySelector('[name="PageContent"]');
 
-$editButton->addEventListener('click', function() use($vrzno, $pageSection) {
+$edited = '';
+
+$editButton->addEventListener('click', function() use($vrzno, $pageSection, $editContent, &$edited) {
+	$edited = $editContent->value;
 	$pageSection->setAttribute('data-current-view', 'edit');
 });
-
-$edited = '';
 
 $viewButton->addEventListener('click', function() use($vrzno, $parser, $pageSection, $content, &$edited) {
 	$content->innerHTML = $parser->parse($edited);
