@@ -10,7 +10,7 @@ form, label {
 }
 form label textarea {
 	resize: vertical;
-	padding: 0;
+	padding: 0.25rem;
 }
 
 label input[type="submit"],
