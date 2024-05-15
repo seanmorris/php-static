@@ -16,13 +16,12 @@ class WikiMarkdown extends \cebe\markdown\GithubMarkdown
 
 		if(strpos($preurl, ' ') > -1)
 		{
-			$origLen  = strlen($markdown);
+			$origLen  = strlen($preurl);
 			$markdown = substr($markdown, 0, 1 + $paren) . urlencode($preurl) . ')';
-			// $addOff = $origLen - strlen($markdown);
-			$addOff = -2;
+			$addOff = $origLen - strlen($preurl);
 		}
 
-		[$text, $url, $title, $offset, $key] = parent::parseLinkOrImage($markdown);
+		[$addOff, $text, $url, $title, $offset, $key] = parent::parseLinkOrImage($markdown);
 
 		var_dump([$text, $url, $title, $offset, $key]);
 
