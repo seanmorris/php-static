@@ -21,9 +21,9 @@ class WikiMarkdown extends \cebe\markdown\GithubMarkdown
 			$addOff = $origLen - strlen($preurl);
 		}
 
-		[$addOff, $text, $url, $title, $offset, $key] = parent::parseLinkOrImage($markdown);
+		[$text, $url, $title, $offset, $key] = parent::parseLinkOrImage($markdown);
 
-		var_dump([$text, $url, $title, $offset, $key]);
+		var_dump([$addOff, $text, $url, $title, $offset, $key]);
 
 		if($url && (substr($url, 0, 7) === 'http://' || substr($url, 0, 8) === 'https://'))
 		{
