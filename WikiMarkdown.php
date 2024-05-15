@@ -10,6 +10,8 @@ class WikiMarkdown extends \cebe\markdown\GithubMarkdown
 		$paren   = strpos($markdown, '(');
 		$preurl  = substr($markdown, 1 + $paren, -1);
 
+		var_dump($markdown);
+
 		if(strpos($preurl, ' ') > -1)
 		{
 			$markdown = substr($markdown, 0, 1 + $paren) . urlencode($preurl) . ')';
