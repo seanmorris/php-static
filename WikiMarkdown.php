@@ -2,9 +2,6 @@
 
 class WikiMarkdown extends \cebe\markdown\GithubMarkdown
 {
-	protected function parseImage($markdown)
-	{}
-
 	protected function parseLinkOrImage($markdown)
 	{
 		$paren  = strpos($markdown, '(');
