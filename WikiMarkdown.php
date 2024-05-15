@@ -7,20 +7,17 @@ class WikiMarkdown extends \cebe\markdown\GithubMarkdown
 
 	protected function parseLinkOrImage($markdown)
 	{
-		$paren  = strpos($markdown, '(');
-		$close  = strpos($markdown, ')', $paren);
-		$preurl = substr($markdown, 1 + $paren, -1, $close);	
+		$paren   = strpos($markdown, '(');
+		$preurl  = substr($markdown, 1 + $paren, -1);
 
-		var_dump([$markdown, $preurl]);
-
-		if($close > -1)
+		if(strpos($preurl, ' ') > -1)
 		{
 			$markdown = substr($markdown, 0, 1 + $paren) . urlencode($preurl) . ')';
 		}
 
 		[$text, $url, $title, $offset, $key] = parent::parseLinkOrImage($markdown);
 
-		var_dump([$markdown, $preurl, $text, $url, $title, $offset, $key]);
+		var_dump([$markdown, $text, $url, $title, $offset, $key]);
 
 		if($url && (substr($url, 0, 7) === 'http://' || substr($url, 0, 8) === 'https://'))
 		{
