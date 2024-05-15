@@ -12,10 +12,10 @@ class WikiMarkdown extends \cebe\markdown\GithubMarkdown
 
 		var_dump($markdown);
 
-		if(strpos($preurl, ' ') > -1)
-		{
-			$markdown = substr($markdown, 0, 1 + $paren) . urlencode($preurl) . ')';
-		}
+		// if(strpos($preurl, ' ') > -1)
+		// {
+		// 	$markdown = substr($markdown, 0, 1 + $paren) . urlencode($preurl) . ')';
+		// }
 
 		[$text, $url, $title, $offset, $key] = parent::parseLinkOrImage($markdown);
 
