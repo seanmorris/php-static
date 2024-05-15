@@ -19,7 +19,7 @@ class WikiMarkdown extends \cebe\markdown\GithubMarkdown
 			$origLen  = strlen($preurl);
 			$encoded  = urlencode($preurl);
 			$markdown = substr($markdown, 0, 1 + $paren) . $encoded . ')';
-			$addOff = $origLen - strlen($preurl);
+			$addOff = $origLen - strlen($encoded);
 		}
 
 		[$text, $url, $title, $offset, $key] = parent::parseLinkOrImage($markdown);
