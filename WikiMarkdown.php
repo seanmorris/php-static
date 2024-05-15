@@ -17,7 +17,8 @@ class WikiMarkdown extends \cebe\markdown\GithubMarkdown
 		if(strpos($preurl, ' ') > -1)
 		{
 			$origLen  = strlen($preurl);
-			$markdown = substr($markdown, 0, 1 + $paren) . urlencode($preurl) . ')';
+			$encoded  = urlencode($preurl);
+			$markdown = substr($markdown, 0, 1 + $paren) . $encoded . ')';
 			$addOff = $origLen - strlen($preurl);
 		}
 
