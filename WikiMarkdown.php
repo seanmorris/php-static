@@ -12,10 +12,12 @@ class WikiMarkdown extends \cebe\markdown\GithubMarkdown
 		$start  = 1 + $paren;
 		$end    = $close - $start;
 		$preurl = substr($markdown, $start, $end);
+		$addOff = 0;
 
 		if(strpos($preurl, ' ') > -1)
 		{
 			$markdown = substr($markdown, 0, 1 + $paren) . urlencode($preurl) . ')';
+			$addOff = 2;
 		}
 
 		[$text, $url, $title, $offset, $key] = parent::parseLinkOrImage($markdown);
@@ -30,6 +32,6 @@ class WikiMarkdown extends \cebe\markdown\GithubMarkdown
 
 		$url = sprintf('/wiki.php?page=%s', $url);
 
-		return [$text, $url, $title, $offset, $key];
+		return [$text, $url, $title, $offset + $addOff, $key];
 	}
 }
